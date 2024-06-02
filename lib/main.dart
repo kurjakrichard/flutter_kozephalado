@@ -12,7 +12,7 @@ late SharedPreferences prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
-            create: (_) => ThemeProvider(isDark: false)),
+            create: (_) => ThemeProvider()..loadSettings()),
         Provider(create: (context) => 'Flutter szuper')
       ],
       child: Builder(builder: (context) {
