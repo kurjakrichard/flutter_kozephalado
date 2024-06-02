@@ -11,22 +11,19 @@ late SharedPreferences prefs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  prefs = await SharedPreferences.getInstance();
-  bool isDark = prefs.getBool('darkMode') ?? false;
-  runApp(MyApp(isDark: isDark));
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.isDark});
-
-  final bool isDark;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
-            create: (_) => ThemeProvider(isDark: isDark)),
+            create: (_) => ThemeProvider(isDark: false)),
         Provider(create: (context) => 'Flutter szuper')
       ],
       child: Builder(builder: (context) {
