@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:provider/provider.dart';
+import '../main.dart';
 
 class HomePage extends HookWidget {
   const HomePage({super.key, required this.title});
@@ -8,7 +9,7 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<int> counter = useState(0);
+    ValueNotifier<int> counter = useState(prefs.getInt('counter') ?? 0);
     return Scaffold(
       drawer: drawerNavigation(context),
       appBar: AppBar(
@@ -88,13 +89,16 @@ class HomePage extends HookWidget {
 
   void _incrementCounter(ValueNotifier counter) {
     counter.value++;
+    prefs.setInt('counter', counter.value);
   }
 
   void _decrementCounter(ValueNotifier counter) {
     counter.value--;
+    prefs.setInt('counter', counter.value);
   }
 
   void _reset(ValueNotifier counter) {
     counter.value = 0;
+    prefs.setInt('counter', counter.value);
   }
 }
