@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_kozephalado/providers/themeprovider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -21,8 +22,10 @@ class SettingsPage extends StatelessWidget {
         ),
         SwitchListTile(
           title: const Text('Dark Theme'),
-          value: false,
-          onChanged: (value) {},
+          value: context.watch<ThemeProvider>().isDark,
+          onChanged: (value) {
+            Provider.of<ThemeProvider>(context, listen: false).toggle();
+          },
         ),
         Column(
           children: [
