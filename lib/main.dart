@@ -1,10 +1,12 @@
-// ignore_for_file: unused_element
 import 'package:flutter/material.dart';
+import 'package:flutter_kozephalado/pages/managetodo.dart';
 import 'package:flutter_kozephalado/pages/settingspage.dart';
-import 'package:flutter_kozephalado/providers/themeprovider.dart';
+import 'package:flutter_kozephalado/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'pages/homepage.dart';
+import 'providers/selected_todo_provider.dart';
+import 'providers/todo_provider.dart';
 import 'widgets/themes.dart';
 
 late SharedPreferences prefs;
@@ -24,7 +26,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ThemeProvider>(
             create: (_) => ThemeProvider()..loadSettings()),
-        Provider(create: (context) => 'Flutter szuper')
+        ChangeNotifierProvider<TodoProvider>(
+            create: (_) => TodoProvider()..selectAll()),
+        ChangeNotifierProvider<SelectedTodoProvider>(
+            create: (_) => SelectedTodoProvider()),
       ],
       child: Builder(builder: (context) {
         return MaterialApp(
@@ -32,8 +37,10 @@ class MyApp extends StatelessWidget {
           title: 'Flutter középhaladó',
           initialRoute: '/',
           routes: {
-            '/': (context) => const HomePage(title: 'Flutter középhaladó'),
-            '/settings': (context) => const SettingsPage()
+            '/': (context) => const HomePage(title: ''),
+            '/settings': (context) => const SettingsPage(),
+            '/insertTodo': (context) => const ManageTodo(title: 'Insert todo'),
+            '/updateTodo': (context) => const ManageTodo(title: 'Update todo')
           },
           theme: Provider.of<ThemeProvider>(context).isDark
               ? darkTheme

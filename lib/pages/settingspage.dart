@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kozephalado/providers/themeprovider.dart';
+import 'package:flutter_kozephalado/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -25,13 +25,8 @@ class SettingsPage extends StatelessWidget {
           value: context.watch<ThemeProvider>().isDark,
           onChanged: (value) {
             Provider.of<ThemeProvider>(context, listen: false).toggle();
+            Navigator.pop(context);
           },
-        ),
-        Column(
-          children: [
-            Text(context.read<String>()),
-            Text(Provider.of<String>(context, listen: false)),
-          ],
         ),
       ]),
     );
