@@ -50,7 +50,6 @@ class DBHelper {
   }
 
   // Select Operation: Get todo by id
-  @override
   Future<Todo> select(int id) async {
     final db = await _initialDatabase();
     List<Map<String, dynamic>> resultSet =
@@ -61,7 +60,6 @@ class DBHelper {
   }
 
   // Select Operation: Get all todos
-  @override
   Future<List<Todo>> selectAll() async {
     final db = await _initialDatabase();
     List<Map<String, dynamic>> resultSet =
@@ -78,14 +76,12 @@ class DBHelper {
   }
 
   // Insert Operation: Insert new todo
-  @override
   Future<int> insert(Todo todo) async {
     final db = await _initialDatabase();
     return await db.insert(table, todo.toJson());
   }
 
   // Update Operation: Update todo
-  @override
   Future<int> update(Todo todo) async {
     final db = await _initialDatabase();
     return await db
@@ -93,7 +89,7 @@ class DBHelper {
   }
 
   // Delete Operation: Delete todo from database
-  @override
+
   Future<int> delete(int id) async {
     final db = await _initialDatabase();
     return await db.delete(table, where: 'id = ?', whereArgs: [id]);
